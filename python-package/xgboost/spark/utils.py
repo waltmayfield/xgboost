@@ -72,7 +72,8 @@ def _get_rabit_args(context: BarrierTaskContext, n_workers: int) -> Dict[str, An
 
 def _get_host_ip(context: BarrierTaskContext) -> str:
     """Gets the hostIP for Spark. This essentially gets the IP of the first worker."""
-    task_ip_list = [info.address.split(":")[0] for info in context.getTaskInfos()]
+    # task_ip_list = [info.address.split(":")[0] for info in context.getTaskInfos()]
+    task_ip_list = [info.address.rpartition(":")[0] for info in context.getTaskInfos()]
     return task_ip_list[0]
 
 
